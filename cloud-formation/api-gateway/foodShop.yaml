@@ -1,0 +1,52 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Resources:
+  foodShopRestApi:
+    Type: "AWS::ApiGateway::RestApi"
+    Properties:
+      Name: "FoodShop"
+      Description: "Market place API for food business, allows to list inventory and get details of an order."
+
+  inventoryResource:
+    Type: "AWS::ApiGateway::Resource"
+    Properties:
+      ParentId: !GetAtt foodShopRestApi.RootResourceId
+      PathPart: "inventory"
+      RestApiId: !Ref foodShopRestApi
+
+  inventoryGetMethod:
+    Type: "AWS::ApiGateway::Method"
+    Properties:
+      AuthorizationType: "NONE"
+      HttpMethod: "GET"
+      ResourceId: !Ref inventoryResource
+      RestApiId: !Ref foodShopRestApi
+
+  ordersResource:
+      Type: "AWS::ApiGateway::Resource"
+      Properties:
+        ParentId: !GetAtt foodShopRestApi.RootResourceId
+        PathPart: "orders"
+        RestApiId: !Ref foodShopRestApi
+
+  ordersPostMethod:
+    Type: "AWS::ApiGateway::Method"
+    Properties:
+      AuthorizationType: "NONE"
+      HttpMethod: "POST"
+      ResourceId: !Ref ordersResource
+      RestApiId: !Ref foodShopRestApi
+
+  orderByIdResource:
+    Type: "AWS::ApiGateway::Resource"
+    Properties:
+      ParentId: !Ref ordersResource
+      PathPart: "{id}"
+      RestApiId: !Ref foodShopRestApi
+
+  orderByIdGetMethod:
+    Type: "AWS::ApiGateway::Method"
+    Properties:
+      AuthorizationType: "NONE"
+      HttpMethod: "GET"
+      ResourceId: !Ref orderByIdResource
+      RestApiId: !Ref foodShopRestApi
