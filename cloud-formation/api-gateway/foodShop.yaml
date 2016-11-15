@@ -20,6 +20,9 @@ Resources:
       HttpMethod: "GET"
       ResourceId: !Ref inventoryResource
       RestApiId: !Ref foodShopRestApi
+      MethodResponses:
+        -
+          StatusCode: "200"
 
   ordersResource:
       Type: "AWS::ApiGateway::Resource"
@@ -35,6 +38,9 @@ Resources:
       HttpMethod: "POST"
       ResourceId: !Ref ordersResource
       RestApiId: !Ref foodShopRestApi
+      MethodResponses:
+        -
+          StatusCode: "200"
 
   orderByIdResource:
     Type: "AWS::ApiGateway::Resource"
@@ -50,3 +56,6 @@ Resources:
       HttpMethod: "GET"
       ResourceId: !Ref orderByIdResource
       RestApiId: !Ref foodShopRestApi
+      MethodResponses:
+        -
+          StatusCode: "200"
